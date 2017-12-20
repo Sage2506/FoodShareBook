@@ -34,7 +34,7 @@ module Api
       private
 
         def dish_params
-          params.require(:dish).permit(:name, :breed, :temperament, :weight, :hobby_ids => [])
+          params.require(:dish).permit(:id, :name, :description, :recipe, :ingredient_ids => [])
         end
     end
   end
