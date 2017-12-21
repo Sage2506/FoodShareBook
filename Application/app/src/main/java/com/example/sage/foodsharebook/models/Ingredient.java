@@ -13,8 +13,11 @@ public class Ingredient{
 	@SerializedName("description")
 	private String description;
 
-	@SerializedName("id")
-	private int id;
+
+	public Ingredient(String name, String description){
+		this.name = name;
+		this.description = description;
+	}
 
 	public void setImage(Object image){
 		this.image = image;
@@ -40,11 +43,12 @@ public class Ingredient{
 		return description;
 	}
 
-	public void setId(int id){
-		this.id = id;
-	}
+	@Override
+	public String toString(){
+		return "Ingredient{ "+
+				"name='" + name + '\'' +
+				", description='" + description+ '\'' +
+				'}';
 
-	public int getId(){
-		return id;
 	}
 }

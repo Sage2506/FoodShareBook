@@ -3,7 +3,11 @@ package com.example.sage.foodsharebook.apiFoodShareBookServices;
 import android.util.Log;
 
 import com.example.sage.foodsharebook.models.Dish;
+import com.example.sage.foodsharebook.models.DishIngredient;
+import com.example.sage.foodsharebook.models.DishIngredientResponse;
+import com.example.sage.foodsharebook.models.DishResponse;
 import com.example.sage.foodsharebook.models.Ingredient;
+import com.example.sage.foodsharebook.models.IngredientResponse;
 
 import java.util.ArrayList;
 
@@ -31,14 +35,14 @@ public class ApiRetrofit {
     }
 
     public void getDishes(){
-        Call<ArrayList<Dish>> dishesArraylistResponse = service.getAllDishes();
+        Call<ArrayList<DishResponse>> dishesArraylistResponse = service.getAllDishes();
 
-        dishesArraylistResponse.enqueue(new Callback<ArrayList<Dish>>() {
+        dishesArraylistResponse.enqueue(new Callback<ArrayList<DishResponse>>() {
             @Override
-            public void onResponse(Call<ArrayList<Dish>> call, Response<ArrayList<Dish>> response) {
+            public void onResponse(Call<ArrayList<DishResponse>> call, Response<ArrayList<DishResponse>> response) {
                 if (response.isSuccessful()){
-                    ArrayList<Dish> dishes = response.body();
-                    for (Dish d : dishes)
+                    ArrayList<DishResponse> dishes = response.body();
+                    for (DishResponse d : dishes)
                     {
                         Log.i(TAG,d.getName()+d.getIngredientIds());
                     }
@@ -50,19 +54,19 @@ public class ApiRetrofit {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Dish>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<DishResponse>> call, Throwable t) {
                     Log.e(TAG,t.getMessage());
             }
         });
     }
     public void getIngredients(){
-        Call<ArrayList<Ingredient>> ingredientsArraylistResponse = service.getAllIngredients();
+        Call<ArrayList<IngredientResponse>> ingredientsArraylistResponse = service.getAllIngredients();
 
-        ingredientsArraylistResponse.enqueue(new Callback<ArrayList<Ingredient>>() {
+        ingredientsArraylistResponse.enqueue(new Callback<ArrayList<IngredientResponse>>() {
             @Override
-            public void onResponse(Call<ArrayList<Ingredient>> call, Response<ArrayList<Ingredient>> response) {
+            public void onResponse(Call<ArrayList<IngredientResponse>> call, Response<ArrayList<IngredientResponse>> response) {
                 if (response.isSuccessful()){
-                    ArrayList<Ingredient> ingredients = response.body();
+                    ArrayList<IngredientResponse> ingredients = response.body();
                     Log.i(TAG, "Objetivo cumplido");
                 }
                 else {
@@ -71,8 +75,65 @@ public class ApiRetrofit {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Ingredient>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<IngredientResponse>> call, Throwable t) {
                 Log.e(TAG, t.getMessage());
+            }
+        });
+    }
+    public void postIngredient(String name, String description) {
+        Call<IngredientResponse> call = service.newIngredient(new Ingredient(name, description));
+        call.enqueue(new Callback<IngredientResponse>() {
+            @Override
+            public void onResponse(Call<IngredientResponse> call, Response<IngredientResponse> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG,"Everything fine");
+                }
+                else{
+                    Log.i(TAG, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IngredientResponse> call, Throwable t) {
+                    Log.i(TAG, t.getMessage());
+            }
+        });
+    }
+    public void postDish(String name, String description, String recipe){
+        Call<DishResponse> call = service.newDish(new Dish(name, recipe, description));
+        call.enqueue(new Callback<DishResponse>() {
+            @Override
+            public void onResponse(Call<DishResponse> call, Response<DishResponse> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG,"Everything fine");
+                }
+                else{
+                    Log.i(TAG, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DishResponse> call, Throwable t) {
+                    Log.i(TAG, t.getMessage());
+            }
+        });
+    }
+    public void postDishIngredient(int dishId, int ingredientId){
+        Call<DishIngredientResponse> call = service.newDishIngredient(new DishIngredient(dishId, ingredientId));
+        call.enqueue(new Callback<DishIngredientResponse>() {
+            @Override
+            public void onResponse(Call<DishIngredientResponse> call, Response<DishIngredientResponse> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG,"Everything fine");
+                }
+                else{
+                    Log.i(TAG, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DishIngredientResponse> call, Throwable t) {
+                Log.i(TAG, t.getMessage());
             }
         });
     }

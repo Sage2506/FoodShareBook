@@ -1,23 +1,27 @@
 package com.example.sage.foodsharebook.models;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class Dish{
+public class IngredientResponse{
+
+	@SerializedName("image")
+	private String image;
 
 	@SerializedName("name")
 	private String name;
 
-	@SerializedName("recipe")
-	private String recipe;
-
 	@SerializedName("description")
 	private String description;
 
-	public Dish(String name, String recipe, String description){
-		this.name = name;
-		this.recipe = recipe;
-		this.description = description;
+	@SerializedName("id")
+	private int id;
+
+	public void setImage(String image){
+		this.image = image;
+	}
+
+	public String getImage(){
+		return image;
 	}
 
 	public void setName(String name){
@@ -28,14 +32,6 @@ public class Dish{
 		return name;
 	}
 
-	public void setRecipe(String recipe){
-		this.recipe = recipe;
-	}
-
-	public String getRecipe(){
-		return recipe;
-	}
-
 	public void setDescription(String description){
 		this.description = description;
 	}
@@ -44,4 +40,11 @@ public class Dish{
 		return description;
 	}
 
+	public void setId(int id){
+		this.id = id;
+	}
+
+	public int getId(){
+		return id;
+	}
 }

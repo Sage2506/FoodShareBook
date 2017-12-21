@@ -28,9 +28,6 @@ public class FoodListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        ApiRetrofit api = new ApiRetrofit();
-        api.getDishes();
     }
 
     @Override
