@@ -1,2 +1,4 @@
 Tutorial de donde sacas la API:
 http://www.thegreatcodeadventure.com/building-a-simple-crud-app-with-react-redux-part-1/
+
+Ejemplo de post Retrofit: https://code.tutsplus.com/tutorials/sending-data-with-retrofit-2-http-client-for-android--cms-27845
