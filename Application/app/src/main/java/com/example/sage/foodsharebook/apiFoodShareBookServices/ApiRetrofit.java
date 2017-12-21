@@ -2,6 +2,7 @@ package com.example.sage.foodsharebook.apiFoodShareBookServices;
 
 import android.util.Log;
 
+import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.models.Dish;
 import com.example.sage.foodsharebook.models.DishIngredient;
 import com.example.sage.foodsharebook.models.DishIngredientResponse;
@@ -34,7 +35,7 @@ public class ApiRetrofit {
         service = retrofit.create(FoodShareBookService.class);
     }
 
-    public void getDishes(){
+    public void getDishes(final DishesListAdapter dishesListAdapter){
         Call<ArrayList<DishResponse>> dishesArraylistResponse = service.getAllDishes();
 
         dishesArraylistResponse.enqueue(new Callback<ArrayList<DishResponse>>() {
@@ -46,6 +47,7 @@ public class ApiRetrofit {
                     {
                         Log.i(TAG,d.getName()+d.getIngredientIds());
                     }
+                    dishesListAdapter.addDishesList(dishes);
                     Log.i(TAG,"Objetivo cumplido");
                 }
                 else{

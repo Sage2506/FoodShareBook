@@ -4,14 +4,20 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
 
 public class FoodListActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private DishesListAdapter dishesListAdapter;
+    private ApiRetrofit api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,8 @@ public class FoodListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        api = new ApiRetrofit();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +36,16 @@ public class FoodListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        recyclerView = findViewById(R.id.rv_dishes);
+        dishesListAdapter = new DishesListAdapter(this);
+        recyclerView.setAdapter(dishesListAdapter);
+        recyclerView.setHasFixedSize(true);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
+        recyclerView.setLayoutManager(layoutManager);
+
+        api.getDishes(dishesListAdapter);
+
     }
 
     @Override
