@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
+
 public class FoodListActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +28,9 @@ public class FoodListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        ApiRetrofit api = new ApiRetrofit();
+        api.getDishes();
     }
 
     @Override
