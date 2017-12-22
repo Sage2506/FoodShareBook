@@ -14,37 +14,44 @@ import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
 import java.util.ArrayList;
 
 public class DishDetailsActivity extends AppCompatActivity {
+    private IngredientsListAdapter adapter;
+    private ApiRetrofit api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new IngredientsListAdapter(this);
+        api = new ApiRetrofit();
+
         setContentView(R.layout.activity_dish_details);
         TextView tvName = findViewById(R.id.tv_dish_name);
         TextView tvDesc = findViewById(R.id.tv_dish_desc);
         TextView tvRecipe = findViewById(R.id.tv_dish_recipe);
         RecyclerView recyclerView = findViewById(R.id.rv_ingredients);
-        IngredientsListAdapter adapter = new IngredientsListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
-
-        ApiRetrofit api = new ApiRetrofit();
 
         Intent data = getIntent();
         String name = data.getStringExtra("name");
         String description = data.getStringExtra("description");
         String recipe = data.getStringExtra("recipe");
         int ingredients = data.getIntExtra("ingredientsSize",0);
+        int[] ingredientsIds = new int[ingredients];
 
         tvName.setText(name);
         tvDesc.setText(description);
         tvRecipe.setText(recipe);
         if(ingredients>0){
-            for (int i = 0; i<ingredients;i++){
-                api.getIngredientByID((data.getIntExtra("ingredient"+i,0)),adapter);
-            }
+            getIngredients(ingredientsIds);
         }
 
+    }
+
+    private void getIngredients(int[] ids){
+            for (int i = 0; i<ids.length;i++){
+                api.getIngredientByID(ids[i],adapter);
+            }
     }
 }
