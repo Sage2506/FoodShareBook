@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         >
         <ImageView
-            android:id="@+id/iv_dish_pic"
+            android:id="@+id/iv_ingredient_pic"
             android:layout_width="250px"
             android:layout_height="250px"
             android:layout_gravity="center_horizontal"
@@ -27,15 +27,15 @@
             android:orientation="vertical"
             >
             <TextView
-                android:id="@+id/tv_dish_name"
+                android:id="@+id/tv_ingredient_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="Platillo"
+                android:text="Ingrediente"
                 android:textAllCaps="true"
                 android:textSize="20dp" />
             <TextView
-                android:id="@+id/tv_dish_desc"
+                android:id="@+id/tv_ingredient_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Descripcion"
@@ -44,4 +44,5 @@
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
+
 </android.support.v7.widget.CardView>

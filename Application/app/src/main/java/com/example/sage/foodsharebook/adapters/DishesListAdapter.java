@@ -21,6 +21,13 @@ import java.util.ArrayList;
 public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.ViewHolder> {
     private ArrayList<DishResponse> dataset;
     private Context context;
+    private Listener listener;
+
+    public interface Listener{
+        void openDish(DishResponse dish);
+    }
+
+    public void setListener(Listener listener){ this.listener = listener;}
 
     public DishesListAdapter(Context context){
         this.context = context;
@@ -33,16 +40,27 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Vi
     }
 
     @Override
-    public DishesListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dish_item,parent,false);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(listener!=null){
+                    DishResponse d = dataset.get((int)view.getTag());
+                    listener.openDish(d);
+                }
+            }
+        });
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(DishesListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         DishResponse d = dataset.get(position);
         holder.TvDishName.setText(d.getName());
         holder.TvDishDesc.setText(d.getDescription());
+        holder.cardView.setTag(position);
     }
 
     @Override

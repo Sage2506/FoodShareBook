@@ -3,6 +3,7 @@ package com.example.sage.foodsharebook.apiFoodShareBookServices;
 import android.util.Log;
 
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
+import com.example.sage.foodsharebook.adapters.IngredientsListAdapter;
 import com.example.sage.foodsharebook.models.Dish;
 import com.example.sage.foodsharebook.models.DishIngredient;
 import com.example.sage.foodsharebook.models.DishIngredientResponse;
@@ -135,6 +136,26 @@ public class ApiRetrofit {
 
             @Override
             public void onFailure(Call<DishIngredientResponse> call, Throwable t) {
+                Log.i(TAG, t.getMessage());
+            }
+        });
+    }
+    public void getIngredientByID(int ingredientId, final IngredientsListAdapter adapter){
+        Call<IngredientResponse> call = service.getIngredient(ingredientId);
+        call.enqueue(new Callback<IngredientResponse>() {
+            @Override
+            public void onResponse(Call<IngredientResponse> call, Response<IngredientResponse> response) {
+                if(response.isSuccessful()){
+                    adapter.addIngredientItem(response.body());
+
+                }
+                else{
+                    Log.i(TAG, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IngredientResponse> call, Throwable t) {
                 Log.i(TAG, t.getMessage());
             }
         });

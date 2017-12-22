@@ -1,5 +1,6 @@
-package com.example.sage.foodsharebook;
+package com.example.sage.foodsharebook.Dishes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,8 +12,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
+import com.example.sage.foodsharebook.models.DishResponse;
 
 public class FoodListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -43,6 +46,22 @@ public class FoodListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
+
+        dishesListAdapter.setListener(new DishesListAdapter.Listener() {
+            @Override
+            public void openDish(DishResponse dish) {
+                Intent dishScreen = new Intent(getApplicationContext(),DishDetailsActivity.class);
+                dishScreen.putExtra("name",dish.getName());
+                dishScreen.putExtra("description", dish.getDescription());
+                dishScreen.putExtra("recipe", dish.getRecipe());
+                dishScreen.putExtra("ingredientsSize",dish.getIngredientIds().size());
+                for(int i= 0; i< dish.getIngredientIds().size(); i++){
+                    dishScreen.putExtra("ingredient"+i,dish.getIngredientIds().get(i));
+                }
+                startActivity(dishScreen);
+
+            }
+        });
 
         api.getDishes(dishesListAdapter);
 

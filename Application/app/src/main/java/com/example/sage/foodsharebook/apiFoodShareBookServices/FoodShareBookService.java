@@ -15,6 +15,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Marisa on 20/12/2017.
@@ -35,4 +37,8 @@ public interface FoodShareBookService {
 
     @POST("dish_ingredients")
     Call<DishIngredientResponse> newDishIngredient(@Body DishIngredient body);
+
+    @GET("ingredients/{INGREDIENT_ID}")
+    Call<IngredientResponse> getIngredient(@Path("INGREDIENT_ID") int ingredient_id);
+
 }
