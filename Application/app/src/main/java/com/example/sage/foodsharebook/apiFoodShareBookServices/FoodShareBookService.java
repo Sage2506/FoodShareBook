@@ -6,6 +6,8 @@ import com.example.sage.foodsharebook.models.DishIngredientResponse;
 import com.example.sage.foodsharebook.models.DishResponse;
 import com.example.sage.foodsharebook.models.Ingredient;
 import com.example.sage.foodsharebook.models.IngredientResponse;
+import com.example.sage.foodsharebook.models.LoginResponse;
+import com.example.sage.foodsharebook.models.UserLogin;
 
 import java.util.ArrayList;
 
@@ -40,5 +42,8 @@ public interface FoodShareBookService {
 
     @GET("ingredients/{INGREDIENT_ID}")
     Call<IngredientResponse> getIngredient(@Path("INGREDIENT_ID") int ingredient_id);
+
+    @POST("users/login")
+    Call<LoginResponse> uerLogin(@Body UserLogin body);
 
 }

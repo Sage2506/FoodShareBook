@@ -10,6 +10,8 @@ import com.example.sage.foodsharebook.models.DishIngredientResponse;
 import com.example.sage.foodsharebook.models.DishResponse;
 import com.example.sage.foodsharebook.models.Ingredient;
 import com.example.sage.foodsharebook.models.IngredientResponse;
+import com.example.sage.foodsharebook.models.LoginResponse;
+import com.example.sage.foodsharebook.models.UserLogin;
 
 import java.util.ArrayList;
 
@@ -156,6 +158,26 @@ public class ApiRetrofit {
 
             @Override
             public void onFailure(Call<IngredientResponse> call, Throwable t) {
+                Log.i(TAG, t.getMessage());
+            }
+        });
+    }
+    public void logIn(String email, String password){
+        Call<LoginResponse> call = service.uerLogin(new UserLogin(email, password));
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG, response.body().getAuthToken());
+
+                }
+                else{
+                    Log.i(TAG, response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Log.i(TAG, t.getMessage());
             }
         });
