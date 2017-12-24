@@ -1,5 +1,6 @@
 package com.example.sage.foodsharebook.apiFoodShareBookServices;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -30,18 +31,20 @@ public class ApiRetrofit {
     final static String TAG = "ApiRetrofit";
     public Retrofit retrofit;
     final FoodShareBookService service;
+    SharedPreferences prefs;
 
 
-    public ApiRetrofit(){
+    public ApiRetrofit(Context context){
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://thawing-citadel-50826.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(FoodShareBookService.class);
+        prefs = context.getSharedPreferences("MyPrefs",0);
     }
 
     public void getDishes(final DishesListAdapter dishesListAdapter){
-        Call<ArrayList<DishResponse>> dishesArraylistResponse = service.getAllDishes();
+        Call<ArrayList<DishResponse>> dishesArraylistResponse = service.getAllDishes(prefs.getString("token",null));
 
         dishesArraylistResponse.enqueue(new Callback<ArrayList<DishResponse>>() {
             @Override
@@ -67,7 +70,7 @@ public class ApiRetrofit {
         });
     }
     public void getIngredients(){
-        Call<ArrayList<IngredientResponse>> ingredientsArraylistResponse = service.getAllIngredients();
+        Call<ArrayList<IngredientResponse>> ingredientsArraylistResponse = service.getAllIngredients(prefs.getString("token",null));
 
         ingredientsArraylistResponse.enqueue(new Callback<ArrayList<IngredientResponse>>() {
             @Override
@@ -145,7 +148,7 @@ public class ApiRetrofit {
         });
     }
     public void getIngredientByID(int ingredientId, final IngredientsListAdapter adapter){
-        Call<IngredientResponse> call = service.getIngredient(ingredientId);
+        Call<IngredientResponse> call = service.getIngredient(prefs.getString("token",null),ingredientId);
         call.enqueue(new Callback<IngredientResponse>() {
             @Override
             public void onResponse(Call<IngredientResponse> call, Response<IngredientResponse> response) {

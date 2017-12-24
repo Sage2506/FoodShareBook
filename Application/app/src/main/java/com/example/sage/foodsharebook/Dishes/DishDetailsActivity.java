@@ -21,7 +21,7 @@ public class DishDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new IngredientsListAdapter(this);
-        api = new ApiRetrofit();
+        api = new ApiRetrofit(this);
 
         setContentView(R.layout.activity_dish_details);
         TextView tvName = findViewById(R.id.tv_dish_name);

@@ -33,7 +33,7 @@ public interface FoodShareBookService {
     Call<DishResponse> newDish(@Body Dish body);
 
     @GET("ingredients")
-    Call<ArrayList<IngredientResponse>> getAllIngredients();
+    Call<ArrayList<IngredientResponse>> getAllIngredients(@Header("Authorization") String token);
 
     @POST("ingredients")
     Call<IngredientResponse> newIngredient(@Body Ingredient body);
@@ -42,7 +42,7 @@ public interface FoodShareBookService {
     Call<DishIngredientResponse> newDishIngredient(@Body DishIngredient body);
 
     @GET("ingredients/{INGREDIENT_ID}")
-    Call<IngredientResponse> getIngredient(@Path("INGREDIENT_ID") int ingredient_id);
+    Call<IngredientResponse> getIngredient(@Header("Authorization") String token,@Path("INGREDIENT_ID") int ingredient_id);
 
     @POST("users/login")
     Call<LoginResponse> uerLogin(@Body UserLogin body);

@@ -28,7 +28,7 @@ public class FoodListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        api = new ApiRetrofit();
+        api = new ApiRetrofit(this);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

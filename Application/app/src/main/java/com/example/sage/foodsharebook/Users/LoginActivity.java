@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-        api = new ApiRetrofit();
+        api = new ApiRetrofit(this);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -300,7 +300,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         showProgress(false);
 
         if (bool) {
-            SharedPreferences prefs = getApplicationContext().getSharedPreferences("MyPref",0);
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences("MyPrefs",0);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("token",token);
             editor.commit();
