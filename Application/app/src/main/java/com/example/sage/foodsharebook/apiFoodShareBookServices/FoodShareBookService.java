@@ -16,6 +16,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -26,7 +27,7 @@ import retrofit2.http.Query;
 
 public interface FoodShareBookService {
     @GET("dishes")
-    Call<ArrayList<DishResponse>> getAllDishes();
+    Call<ArrayList<DishResponse>> getAllDishes(@Header("Authorization") String token);
 
     @POST("dishes")
     Call<DishResponse> newDish(@Body Dish body);

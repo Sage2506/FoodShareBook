@@ -1,5 +1,6 @@
 package com.example.sage.foodsharebook.apiFoodShareBookServices;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
@@ -29,6 +30,7 @@ public class ApiRetrofit {
     final static String TAG = "ApiRetrofit";
     public Retrofit retrofit;
     final FoodShareBookService service;
+
 
     public ApiRetrofit(){
         retrofit = new Retrofit.Builder()
@@ -162,24 +164,30 @@ public class ApiRetrofit {
             }
         });
     }
-    public void logIn(String email, String password){
+    public void logIn(String email, String password, final ServiceCallBack serviceCallBack){
         Call<LoginResponse> call = service.uerLogin(new UserLogin(email, password));
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, response.body().getAuthToken());
+                    serviceCallBack.response(true, response.body().getAuthToken());
 
                 }
                 else{
                     Log.i(TAG, response.toString());
+                    serviceCallBack.response(false,"");
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Log.i(TAG, t.getMessage());
+                serviceCallBack.response(false,"");
             }
         });
+    }
+    public interface ServiceCallBack{
+        void response(Boolean bool, String token);
     }
 }
