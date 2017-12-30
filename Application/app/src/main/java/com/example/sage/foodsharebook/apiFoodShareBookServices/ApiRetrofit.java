@@ -36,7 +36,7 @@ public class ApiRetrofit {
 
     public ApiRetrofit(Context context){
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://foodsharebook.herokuapp.com/api/v1/")
+                .baseUrl("https://localhost:3000/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(FoodShareBookService.class);
