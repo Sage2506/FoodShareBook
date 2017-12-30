@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.models.IngredientResponse;
 
@@ -47,6 +49,12 @@ public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsList
         IngredientResponse i = dataset.get(position);
         holder.TvIngredientName.setText(i.getName());
         holder.TvIngredientDesc.setText(i.getDescription());
+        Glide.with(context)
+                .load(i.getImage())
+                .centerCrop()
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.IvIngredientPic);
     }
 
     @Override

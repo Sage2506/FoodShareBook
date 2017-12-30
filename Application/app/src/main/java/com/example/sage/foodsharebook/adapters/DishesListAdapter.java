@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.models.DishResponse;
 
@@ -61,6 +63,12 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Vi
         holder.TvDishName.setText(d.getName());
         holder.TvDishDesc.setText(d.getDescription());
         holder.cardView.setTag(position);
+        Glide.with(context)
+                .load(d.getImage())
+                .centerCrop()
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.IvDishPic);
     }
 
     @Override

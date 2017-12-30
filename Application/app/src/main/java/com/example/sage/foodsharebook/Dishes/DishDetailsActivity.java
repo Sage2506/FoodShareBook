@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.adapters.IngredientsListAdapter;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
@@ -25,6 +28,7 @@ public class DishDetailsActivity extends AppCompatActivity {
         api = new ApiRetrofit(this);
 
         setContentView(R.layout.activity_dish_details);
+        ImageView ivPic = findViewById(R.id.iv_dish_pic);
         TextView tvName = findViewById(R.id.tv_dish_name);
         TextView tvDesc = findViewById(R.id.tv_dish_desc);
         TextView tvRecipe = findViewById(R.id.tv_dish_recipe);
@@ -34,11 +38,19 @@ public class DishDetailsActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
 
+
         Intent data = getIntent();
         String name = data.getStringExtra("name");
         String description = data.getStringExtra("description");
         String recipe = data.getStringExtra("recipe");
+        String image = data.getStringExtra("image");
         int ingredients = data.getIntExtra("ingredientsSize",0);
+        Glide.with(this)
+                .load(image)
+                .centerCrop()
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(ivPic);
         int[] ingredientsIds = new int[ingredients];
         for(int i = 0 ; i<ingredients; i++){
             ingredientsIds[i] = data.getIntExtra("ingredient"+i,0);
