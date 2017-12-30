@@ -20,6 +20,9 @@ public class DishResponse{
 	@SerializedName("id")
 	private int id;
 
+	@SerializedName("image")
+	private String image;
+
 	public List<Integer> getIngredientIds(){
 		return ingredientIds;
 	}
@@ -39,4 +42,6 @@ public class DishResponse{
 	public int getId(){
 		return id;
 	}
+
+	public String getImage(){return image;}
 }

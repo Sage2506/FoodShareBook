@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.sage.foodsharebook.R;
@@ -39,10 +40,15 @@ public class DishDetailsActivity extends AppCompatActivity {
         String recipe = data.getStringExtra("recipe");
         int ingredients = data.getIntExtra("ingredientsSize",0);
         int[] ingredientsIds = new int[ingredients];
+        for(int i = 0 ; i<ingredients; i++){
+            ingredientsIds[i] = data.getIntExtra("ingredient"+i,0);
+        }
+
 
         tvName.setText(name);
         tvDesc.setText(description);
         tvRecipe.setText(recipe);
+        Log.i("Dishes details","numero de ingredientes: "+ingredients);
         if(ingredients>0){
             getIngredients(ingredientsIds);
         }
@@ -51,6 +57,7 @@ public class DishDetailsActivity extends AppCompatActivity {
 
     private void getIngredients(int[] ids){
             for (int i = 0; i<ids.length;i++){
+                Log.i("Dish details","id de: "+ids[i]);
                 api.getIngredientByID(ids[i],adapter);
             }
     }

@@ -36,7 +36,7 @@ public class ApiRetrofit {
 
     public ApiRetrofit(Context context){
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://localhost:3000/api/v1/")
+                .baseUrl("https://foodsharebook.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(FoodShareBookService.class);
@@ -51,12 +51,7 @@ public class ApiRetrofit {
             public void onResponse(Call<ArrayList<DishResponse>> call, Response<ArrayList<DishResponse>> response) {
                 if (response.isSuccessful()){
                     ArrayList<DishResponse> dishes = response.body();
-                    for (DishResponse d : dishes)
-                    {
-                        Log.i(TAG,d.getName()+d.getIngredientIds());
-                    }
                     dishesListAdapter.addDishesList(dishes);
-                    Log.i(TAG,"Objetivo cumplido");
                 }
                 else{
                     Log.e(TAG,response.toString());
