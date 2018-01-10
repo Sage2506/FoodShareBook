@@ -16,7 +16,7 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String token = prefs.getString("token",null);
         Intent intent;
-        if (token.equals(null)){ intent = new Intent(this,LoginActivity.class); }
+        if (token == null){ intent = new Intent(this,LoginActivity.class); }
         else{ intent = new Intent(this, FoodListActivity.class); }
         startActivity(intent);
         finish();
