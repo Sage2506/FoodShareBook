@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.sage.foodsharebook.Dishes.DishFormActivity"
+    android:fillViewport="true">
+
+
+        <LinearLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.sage.foodsharebook.Dishes.DishDetailsActivity"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/iv_dish_pic"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                >
+
+            </ImageButton>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:orientation="vertical"
+                >
+                <EditText
+                    android:id="@+id/tv_dish_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Platillo"
+                    android:textSize="@dimen/dish_name"
+                    />
+                <EditText
+                    android:id="@+id/tv_dish_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Descripcion"
+                    android:textSize="@dimen/dish_decription"
+                    />
+                <EditText
+                    android:id="@+id/tv_dish_recipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Receta"
+                    android:textSize="@dimen/dish_recipe"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+</ScrollView>
