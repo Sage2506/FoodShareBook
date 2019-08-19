@@ -107,16 +107,19 @@ public class ApiRetrofit {
             }
         });
     }
-    public void postDish(String name, String description, String recipe){
-        Call<DishResponse> call = service.newDish(new Dish(name, recipe, description));
+    public void postDish(String name, String description, String recipe, final DishCallBack dishCallBack ){
+        Call<DishResponse> call = service.newDish(new Dish(name, recipe, description, prefs.getInt(USER_ID, -1)));
         call.enqueue(new Callback<DishResponse>() {
             @Override
             public void onResponse(Call<DishResponse> call, Response<DishResponse> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG,"Everything fine");
+                    DishResponse dish = response.body();
+                    dishCallBack.response(true, dish);
                 }
                 else{
                     Log.i(TAG, response.toString());
+                    dishCallBack.response( false, null);
                 }
             }
 
@@ -172,23 +175,27 @@ public class ApiRetrofit {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, response.body().getAuthToken());
-                    serviceCallBack.response(true, response.body().getAuthToken());
+                    serviceCallBack.response(true, response.body().getAuthToken(), response.body().getUser_id());
 
                 }
                 else{
                     Log.i(TAG, response.toString());
-                    serviceCallBack.response(false,"");
+                    serviceCallBack.response(false,"", -1);
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Log.i(TAG, t.getMessage());
-                serviceCallBack.response(false,"");
+                serviceCallBack.response(false,"", -1);
             }
         });
     }
     public interface ServiceCallBack{
-        void response(Boolean bool, String token);
+        void response(Boolean bool, String token, int user_id);
+    }
+
+    public interface DishCallBack{
+        void response (Boolean bool, DishResponse dish);
     }
 }

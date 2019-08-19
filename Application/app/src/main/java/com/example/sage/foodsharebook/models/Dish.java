@@ -26,10 +26,14 @@ public class Dish{
 	@SerializedName("users_ids")
 	private int usersIds;
 
-	public Dish(String name, String recipe, String description){
+	@SerializedName("user_id")
+	private int user_id;
+
+	public Dish(String name, String recipe, String description, int user_id){
 		this.name = name;
 		this.recipe = recipe;
 		this.description = description;
+		this.user_id = user_id;
 	}
 
 	public void setImage(String image){
@@ -78,6 +82,14 @@ public class Dish{
 
 	public int getId(){
 		return id;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public void setUsersIds(int usersIds){

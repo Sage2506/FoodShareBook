@@ -10,6 +10,7 @@ public class Constants {
     //---------------------- Shared Preferences Strings---------------------
     public static final String SHARED_PREFERENCES_NAME = "MyPrefs";
     public static final String USER_TOKEN = "token";
+    public static final String USER_ID = "user_id";
 
 
     //----------------------API Strings---------------------

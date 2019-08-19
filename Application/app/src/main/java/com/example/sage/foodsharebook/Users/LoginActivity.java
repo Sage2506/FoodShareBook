@@ -38,6 +38,7 @@ import java.util.List;
 import com.example.sage.foodsharebook.Dishes.FoodListActivity;
 import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
+import static com.example.sage.foodsharebook.Config.Constants.*;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -290,18 +291,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void UserLogin(String email, String password){
         api.logIn(email, password, new ApiRetrofit.ServiceCallBack() {
             @Override
-            public void response(Boolean bool, String token) {
-                postResult(bool, token);
+            public void response(Boolean bool, String token, int user_id) {
+                postResult(bool, token, user_id);
             }
         });
     }
-    private void postResult(Boolean bool, String token){
+    private void postResult(Boolean bool, String token, int user_id){
         showProgress(false);
 
         if (bool) {
-            SharedPreferences prefs = getApplicationContext().getSharedPreferences("MyPrefs",0);
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_NAME,0);
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("token",token);
+            editor.putString(USER_TOKEN,token);
+            editor.putInt(USER_ID, user_id);
             editor.commit();
             Intent dishes = new Intent(getApplicationContext(),FoodListActivity.class);
             startActivity(dishes);

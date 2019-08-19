@@ -31,7 +31,7 @@
                 android:orientation="vertical"
                 >
                 <EditText
-                    android:id="@+id/tv_dish_name"
+                    android:id="@+id/te_dish_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/dish"
@@ -39,7 +39,7 @@
                     android:inputType=""
                     android:autofillHints="" />
                 <EditText
-                    android:id="@+id/tv_dish_desc"
+                    android:id="@+id/te_dish_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/description"
@@ -47,7 +47,7 @@
                     android:autofillHints=""
                     android:inputType="" />
                 <EditText
-                    android:id="@+id/tv_dish_recipe"
+                    android:id="@+id/te_dish_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/recipe"
@@ -55,10 +55,17 @@
                     android:autofillHints=""
                     android:inputType="" />
 
+                <Button
+                    android:id="@+id/btn_create_dish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Crear" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_ingredients"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="306dp" />
+
             </LinearLayout>
 
 
