@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.adapters.IngredientsListAdapter;
 import com.example.sage.foodsharebook.models.Dish;
@@ -22,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import static com.example.sage.foodsharebook.Config.Constants.*;
 
 /**
  * Created by Marisa on 20/12/2017.
@@ -36,15 +38,15 @@ public class ApiRetrofit {
 
     public ApiRetrofit(Context context){
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://foodsharebook.herokuapp.com/api/v1/")
+                .baseUrl(DEVELOPMENT_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(FoodShareBookService.class);
-        prefs = context.getSharedPreferences("MyPrefs",0);
+        prefs = context.getSharedPreferences(SHARED_PREFERENCES_NAME,0);
     }
 
     public void getDishes(final DishesListAdapter dishesListAdapter){
-        Call<ArrayList<DishResponse>> dishesArraylistResponse = service.getAllDishes(prefs.getString("token",null));
+        Call<ArrayList<DishResponse>> dishesArraylistResponse = service.getAllDishes(prefs.getString(USER_TOKEN,null));
 
         dishesArraylistResponse.enqueue(new Callback<ArrayList<DishResponse>>() {
             @Override
@@ -64,14 +66,15 @@ public class ApiRetrofit {
             }
         });
     }
-    public void getIngredients(){
-        Call<ArrayList<IngredientResponse>> ingredientsArraylistResponse = service.getAllIngredients(prefs.getString("token",null));
+    public void getIngredients(final IngredientsListAdapter adapter){
+        Call<ArrayList<IngredientResponse>> ingredientsArraylistResponse = service.getAllIngredients(prefs.getString(USER_TOKEN,null));
 
         ingredientsArraylistResponse.enqueue(new Callback<ArrayList<IngredientResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<IngredientResponse>> call, Response<ArrayList<IngredientResponse>> response) {
                 if (response.isSuccessful()){
                     ArrayList<IngredientResponse> ingredients = response.body();
+                    adapter.addIngredientsList(ingredients);
                     Log.i(TAG, "Objetivo cumplido");
                 }
                 else {

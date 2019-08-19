@@ -10,10 +10,9 @@
 
 
         <LinearLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
 
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context="com.example.sage.foodsharebook.Dishes.DishDetailsActivity"
             android:orientation="vertical">
             <ImageButton
@@ -34,23 +33,25 @@
                     android:id="@+id/tv_dish_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Platillo"
+                    android:hint="@string/dish"
                     android:textSize="@dimen/dish_name"
-                    />
+                    android:inputType=""
+                    android:autofillHints="" />
                 <EditText
                     android:id="@+id/tv_dish_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Descripcion"
+                    android:hint="@string/description"
                     android:textSize="@dimen/dish_decription"
-                    />
+                    android:autofillHints=""
+                    android:inputType="" />
                 <EditText
                     android:id="@+id/tv_dish_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Receta"
+                    android:hint="@string/recipe"
                     android:textSize="@dimen/dish_recipe"
-                    />
+                    android:autofillHints="" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_ingredients"

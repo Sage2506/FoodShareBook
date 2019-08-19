@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.adapters.IngredientsListAdapter;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
+import static com.example.sage.foodsharebook.Config.Constants.*;
 
-import java.util.ArrayList;
+
 
 public class DishDetailsActivity extends AppCompatActivity {
     private IngredientsListAdapter adapter;
@@ -40,11 +42,11 @@ public class DishDetailsActivity extends AppCompatActivity {
 
 
         Intent data = getIntent();
-        String name = data.getStringExtra("name");
-        String description = data.getStringExtra("description");
-        String recipe = data.getStringExtra("recipe");
-        String image = data.getStringExtra("image");
-        int ingredients = data.getIntExtra("ingredientsSize",0);
+        String name = data.getStringExtra(DISH_NAME);
+        String description = data.getStringExtra(DISH_DESCRIPTION);
+        String recipe = data.getStringExtra(DISH_RECIPE);
+        String image = data.getStringExtra(DISH_IMAGE);
+        int ingredients = data.getIntExtra(DISH_INGREDIENTS_NUMBER,0);
         Glide.with(this)
                 .load(image)
                 .centerCrop()
@@ -53,7 +55,7 @@ public class DishDetailsActivity extends AppCompatActivity {
                 .into(ivPic);
         int[] ingredientsIds = new int[ingredients];
         for(int i = 0 ; i<ingredients; i++){
-            ingredientsIds[i] = data.getIntExtra("ingredient"+i,0);
+            ingredientsIds[i] = data.getIntExtra(DISH_INGREDIENT+i,0);
         }
 
 

@@ -16,6 +16,9 @@ import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
 import com.example.sage.foodsharebook.models.DishResponse;
+import static com.example.sage.foodsharebook.Config.Constants.*;
+
+
 
 public class FoodListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -51,7 +54,7 @@ public class FoodListActivity extends AppCompatActivity {
             @Override
             public void openDish(DishResponse dish) {
                 Intent dishScreen = new Intent(getApplicationContext(),DishDetailsActivity.class);
-                dishScreen.putExtra("name",dish.getName());
+                dishScreen.putExtra(DISH_NAME,dish.getName());
                 dishScreen.putExtra("description", dish.getDescription());
                 dishScreen.putExtra("recipe", dish.getRecipe());
                 if(dish.getIngredients() != null)
