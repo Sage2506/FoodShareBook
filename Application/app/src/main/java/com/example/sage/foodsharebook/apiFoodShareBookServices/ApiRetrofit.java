@@ -9,14 +9,13 @@ import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.adapters.IngredientsListAdapter;
 import com.example.sage.foodsharebook.models.Dish;
 import com.example.sage.foodsharebook.models.DishIngredient;
-import com.example.sage.foodsharebook.models.DishIngredientResponse;
-import com.example.sage.foodsharebook.models.DishResponse;
 import com.example.sage.foodsharebook.models.Ingredient;
 import com.example.sage.foodsharebook.models.IngredientResponse;
 import com.example.sage.foodsharebook.models.LoginResponse;
 import com.example.sage.foodsharebook.models.UserLogin;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,13 +45,13 @@ public class ApiRetrofit {
     }
 
     public void getDishes(final DishesListAdapter dishesListAdapter){
-        Call<ArrayList<DishResponse>> dishesArraylistResponse = service.getAllDishes(prefs.getString(USER_TOKEN,null));
+        Call<ArrayList<Dish>> dishesArraylistResponse = service.getAllDishes(prefs.getString(USER_TOKEN,null));
 
-        dishesArraylistResponse.enqueue(new Callback<ArrayList<DishResponse>>() {
+        dishesArraylistResponse.enqueue(new Callback<ArrayList<Dish>>() {
             @Override
-            public void onResponse(Call<ArrayList<DishResponse>> call, Response<ArrayList<DishResponse>> response) {
+            public void onResponse(Call<ArrayList<Dish>> call, Response<ArrayList<Dish>> response) {
                 if (response.isSuccessful()){
-                    ArrayList<DishResponse> dishes = response.body();
+                    ArrayList<Dish> dishes = response.body();
                     dishesListAdapter.addDishesList(dishes);
                 }
                 else{
@@ -61,7 +60,7 @@ public class ApiRetrofit {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<DishResponse>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Dish>> call, Throwable t) {
                     Log.e(TAG,t.getMessage());
             }
         });
@@ -107,14 +106,14 @@ public class ApiRetrofit {
             }
         });
     }
-    public void postDish(String name, String description, String recipe, final DishCallBack dishCallBack ){
-        Call<DishResponse> call = service.newDish(new Dish(name, recipe, description, prefs.getInt(USER_ID, -1)));
-        call.enqueue(new Callback<DishResponse>() {
+    public void postDish(String name, String description, String recipe, List<DishIngredient> dishIngredients, final DishCallBack dishCallBack ){
+        Call<Dish> call = service.newDish(prefs.getString(USER_TOKEN,null),new Dish(name, recipe, description, prefs.getInt(USER_ID, -1), dishIngredients));
+        call.enqueue(new Callback<Dish>() {
             @Override
-            public void onResponse(Call<DishResponse> call, Response<DishResponse> response) {
+            public void onResponse(Call<Dish> call, Response<Dish> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG,"Everything fine");
-                    DishResponse dish = response.body();
+                    Dish dish = response.body();
                     dishCallBack.response(true, dish);
                 }
                 else{
@@ -124,12 +123,12 @@ public class ApiRetrofit {
             }
 
             @Override
-            public void onFailure(Call<DishResponse> call, Throwable t) {
+            public void onFailure(Call<Dish> call, Throwable t) {
                     Log.i(TAG, t.getMessage());
             }
         });
     }
-    public void postDishIngredient(int dishId, int ingredientId){
+    /*public void postDishIngredient(int dishId, int ingredientId){
         Call<DishIngredientResponse> call = service.newDishIngredient(new DishIngredient(dishId, ingredientId));
         call.enqueue(new Callback<DishIngredientResponse>() {
             @Override
@@ -147,7 +146,7 @@ public class ApiRetrofit {
                 Log.i(TAG, t.getMessage());
             }
         });
-    }
+    }*/
     public void getIngredientByID(int ingredientId, final IngredientsListAdapter adapter){
         Call<IngredientResponse> call = service.getIngredient(prefs.getString("token",null),ingredientId);
         call.enqueue(new Callback<IngredientResponse>() {
@@ -196,6 +195,6 @@ public class ApiRetrofit {
     }
 
     public interface DishCallBack{
-        void response (Boolean bool, DishResponse dish);
+        void response (Boolean bool, Dish dish);
     }
 }

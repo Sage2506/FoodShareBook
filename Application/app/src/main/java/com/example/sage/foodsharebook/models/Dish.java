@@ -1,12 +1,20 @@
 package com.example.sage.foodsharebook.models;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class Dish{
+
+public class Dish implements Serializable {
+
+	@SerializedName("dish_ingredients")
+	private List<DishIngredient> dishIngredients;
 
 	@SerializedName("image")
 	private String image;
+
+	@SerializedName("user_id")
+	private Integer userId;
 
 	@SerializedName("name")
 	private String name;
@@ -17,23 +25,23 @@ public class Dish{
 	@SerializedName("description")
 	private String description;
 
-	@SerializedName("ingredients")
-	private List<IngredientsItem> ingredients;
-
 	@SerializedName("id")
-	private int id;
+	private Integer id;
 
-	@SerializedName("users_ids")
-	private int usersIds;
-
-	@SerializedName("user_id")
-	private int user_id;
-
-	public Dish(String name, String recipe, String description, int user_id){
+	public Dish(String name, String recipe, String description, int userId, List<DishIngredient> dishIngredients){
 		this.name = name;
 		this.recipe = recipe;
 		this.description = description;
-		this.user_id = user_id;
+		this.userId = userId;
+		this.dishIngredients = dishIngredients;
+	}
+
+	public void setDishIngredients(List<DishIngredient> dishIngredients){
+		this.dishIngredients = dishIngredients;
+	}
+
+	public List<DishIngredient> getDishIngredients(){
+		return dishIngredients;
 	}
 
 	public void setImage(String image){
@@ -42,6 +50,14 @@ public class Dish{
 
 	public String getImage(){
 		return image;
+	}
+
+	public void setUserId(int userId){
+		this.userId = userId;
+	}
+
+	public Object getUserId(){
+		return userId;
 	}
 
 	public void setName(String name){
@@ -68,14 +84,6 @@ public class Dish{
 		return description;
 	}
 
-	public void setIngredients(List<IngredientsItem> ingredients){
-		this.ingredients = ingredients;
-	}
-
-	public List<IngredientsItem> getIngredients(){
-		return ingredients;
-	}
-
 	public void setId(int id){
 		this.id = id;
 	}
@@ -83,34 +91,4 @@ public class Dish{
 	public int getId(){
 		return id;
 	}
-
-	public int getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-
-	public void setUsersIds(int usersIds){
-		this.usersIds = usersIds;
-	}
-
-	public int getUsersIds(){
-		return usersIds;
-	}
-
-	@Override
- 	public String toString(){
-		return 
-			"Dish{" + 
-			"image = '" + image + '\'' + 
-			",name = '" + name + '\'' + 
-			",recipe = '" + recipe + '\'' + 
-			",description = '" + description + '\'' + 
-			",ingredients = '" + ingredients + '\'' + 
-			",id = '" + id + '\'' + 
-			",users_ids = '" + usersIds + '\'' + 
-			"}";
-		}
 }

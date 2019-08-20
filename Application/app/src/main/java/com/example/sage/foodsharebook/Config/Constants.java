@@ -3,7 +3,7 @@ package com.example.sage.foodsharebook.Config;
 public class Constants {
 
     public static final String HEROKU_API_URL = "https://foodsharebook.herokuapp.com/api/v1/";
-    public static final String DEVELOPMENT_API_URL = "http://192.168.1.72:3000/api/v1/";
+    public static final String DEVELOPMENT_API_URL = "http://192.168.1.209:3000/api/v1/";
     public static final String LOCAL_API_URL = "https://localhost:3000/api/v1/";
 
 

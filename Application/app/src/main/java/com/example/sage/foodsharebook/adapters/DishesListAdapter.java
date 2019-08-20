@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sage.foodsharebook.R;
-import com.example.sage.foodsharebook.models.DishResponse;
+import com.example.sage.foodsharebook.models.Dish;
 
 import java.util.ArrayList;
 
@@ -21,12 +21,12 @@ import java.util.ArrayList;
  */
 
 public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.ViewHolder> {
-    private ArrayList<DishResponse> dataset;
+    private ArrayList<Dish> dataset;
     private Context context;
     private Listener listener;
 
     public interface Listener{
-        void openDish(DishResponse dish);
+        void openDish(Dish dish);
     }
 
     public void setListener(Listener listener){ this.listener = listener;}
@@ -36,7 +36,7 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Vi
         dataset = new ArrayList<>();
     }
 
-    public void addDishesList(ArrayList<DishResponse> dishes){
+    public void addDishesList(ArrayList<Dish> dishes){
         dataset.addAll(dishes);
         notifyDataSetChanged();
     }
@@ -49,7 +49,7 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Vi
             @Override
             public void onClick(View view) {
                 if(listener!=null){
-                    DishResponse d = dataset.get((int)view.getTag());
+                    Dish d = dataset.get((int)view.getTag());
                     listener.openDish(d);
                 }
             }
@@ -59,7 +59,7 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        DishResponse d = dataset.get(position);
+        Dish d = dataset.get(position);
         holder.TvDishName.setText(d.getName());
         holder.TvDishDesc.setText(d.getDescription());
         holder.cardView.setTag(position);

@@ -1,26 +1,33 @@
 package com.example.sage.foodsharebook.models;
 
+
 import com.google.gson.annotations.SerializedName;
 
-public class DishIngredient{
+import java.io.Serializable;
 
-	@SerializedName("dish_id")
-	private int dishId;
+public class DishIngredient implements Serializable {
+
+	@SerializedName("quantity")
+	private Object quantity;
 
 	@SerializedName("ingredient_id")
 	private int ingredientId;
 
-	public DishIngredient(int dishId, int ingredientId){
-		this.dishId = dishId;
-		this.ingredientId = ingredientId;
+	@SerializedName("ingredient_name")
+	private String ingredientName;
+
+	@SerializedName("ingredient_image")
+	private String ingredientImage;
+
+	@SerializedName("measure_id")
+	private Object measureId;
+
+	public void setQuantity(Object quantity){
+		this.quantity = quantity;
 	}
 
-	public void setDishId(int dishId){
-		this.dishId = dishId;
-	}
-
-	public int getDishId(){
-		return dishId;
+	public Object getQuantity(){
+		return quantity;
 	}
 
 	public void setIngredientId(int ingredientId){
@@ -29,5 +36,29 @@ public class DishIngredient{
 
 	public int getIngredientId(){
 		return ingredientId;
+	}
+
+	public void setIngredientName(String ingredientName){
+		this.ingredientName = ingredientName;
+	}
+
+	public String getIngredientName(){
+		return ingredientName;
+	}
+
+	public void setIngredientImage(String ingredientImage){
+		this.ingredientImage = ingredientImage;
+	}
+
+	public String getIngredientImage(){
+		return ingredientImage;
+	}
+
+	public void setMeasureId(Object measureId){
+		this.measureId = measureId;
+	}
+
+	public Object getMeasureId(){
+		return measureId;
 	}
 }

@@ -3,7 +3,6 @@ package com.example.sage.foodsharebook.Dishes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,8 @@ import android.view.MenuItem;
 import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
-import com.example.sage.foodsharebook.models.DishResponse;
+import com.example.sage.foodsharebook.models.Dish;
+
 import static com.example.sage.foodsharebook.Config.Constants.*;
 
 
@@ -52,17 +52,17 @@ public class FoodListActivity extends AppCompatActivity {
 
         dishesListAdapter.setListener(new DishesListAdapter.Listener() {
             @Override
-            public void openDish(DishResponse dish) {
+            public void openDish(Dish dish) {
                 Intent dishScreen = new Intent(getApplicationContext(),DishDetailsActivity.class);
                 dishScreen.putExtra(DISH_NAME,dish.getName());
                 dishScreen.putExtra("description", dish.getDescription());
                 dishScreen.putExtra("recipe", dish.getRecipe());
-                if(dish.getIngredients() != null)
-                dishScreen.putExtra("ingredientsSize",dish.getIngredients().size());
+                if(dish.getDishIngredients() != null)
+                dishScreen.putExtra("ingredientsSize",dish.getDishIngredients().size());
                 dishScreen.putExtra("image",dish.getImage());
-                if(dish.getIngredients() != null)
-                for(int i= 0; i< dish.getIngredients().size(); i++){
-                    dishScreen.putExtra("ingredient"+i,dish.getIngredients().get(i).getId());
+                if(dish.getDishIngredients() != null)
+                for(int i= 0; i< dish.getDishIngredients().size(); i++){
+                    dishScreen.putExtra("ingredient"+i,dish.getDishIngredients().get(i).getIngredientId());
                 }
                 startActivity(dishScreen);
 

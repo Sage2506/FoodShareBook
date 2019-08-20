@@ -10,11 +10,9 @@ import android.widget.EditText;
 
 import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
-import com.example.sage.foodsharebook.models.DishResponse;
-import static com.example.sage.foodsharebook.Config.Constants.*;
+import com.example.sage.foodsharebook.models.Dish;
 
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
+import static com.example.sage.foodsharebook.Config.Constants.*;
 
 public class DishFormActivity extends AppCompatActivity {
     private String TAG = "DishFormActivity";
@@ -35,7 +33,7 @@ public class DishFormActivity extends AppCompatActivity {
         api = new ApiRetrofit(this);
 
 
-        name = findViewById(R.id.te_dish_desc);
+        name = findViewById(R.id.te_dish_name);
         recipe = findViewById(R.id.te_dish_recipe);
         description = findViewById(R.id.te_dish_desc);
         btnCreate = findViewById(R.id.btn_create_dish);
@@ -65,11 +63,12 @@ public class DishFormActivity extends AppCompatActivity {
 
     private void createIngredient(){
         prefs = getApplicationContext().getSharedPreferences(SHARED_PREFERENCES_NAME,0);
-        api.postDish(name.getText().toString().trim(), description.getText().toString().trim(), recipe.getText().toString().trim(), new ApiRetrofit.DishCallBack() {
+        //TODO: create dish form
+        api.postDish(name.getText().toString().trim(), description.getText().toString().trim(), recipe.getText().toString().trim(), null, new ApiRetrofit.DishCallBack() {
             @Override
-            public void response(Boolean bool, DishResponse dish) {
+            public void response(Boolean bool, Dish dish) {
                 if(bool){
-                    Log.i(TAG,"Dish created succesfully");
+                    Log.i(TAG,"Dish created id: "+dish.getId());
                     clearFields();
 
 
