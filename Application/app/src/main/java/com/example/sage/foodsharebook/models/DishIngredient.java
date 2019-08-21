@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class DishIngredient implements Serializable {
 
 	@SerializedName("quantity")
-	private Object quantity;
+	private float quantity;
 
 	@SerializedName("ingredient_id")
 	private int ingredientId;
@@ -20,13 +20,21 @@ public class DishIngredient implements Serializable {
 	private String ingredientImage;
 
 	@SerializedName("measure_id")
-	private Object measureId;
+	private Integer measureId;
 
-	public void setQuantity(Object quantity){
+	public DishIngredient(int ingredientId, String ingredientName, String ingredientImage, int measureId, float quantity ){
+		this.ingredientId = ingredientId;
+		this.ingredientName = ingredientName;
+		this.ingredientImage = ingredientImage;
+		this.measureId = measureId;
 		this.quantity = quantity;
 	}
 
-	public Object getQuantity(){
+	public void setQuantity(Float quantity){
+		this.quantity = quantity;
+	}
+
+	public Float getQuantity(){
 		return quantity;
 	}
 
@@ -54,11 +62,11 @@ public class DishIngredient implements Serializable {
 		return ingredientImage;
 	}
 
-	public void setMeasureId(Object measureId){
+	public void setMeasureId(Integer measureId){
 		this.measureId = measureId;
 	}
 
-	public Object getMeasureId(){
+	public Integer getMeasureId(){
 		return measureId;
 	}
 }

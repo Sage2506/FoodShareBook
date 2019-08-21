@@ -55,16 +55,18 @@
                 android:autofillHints=""
                 android:inputType="" />
 
-            <Button
-                android:id="@+id/btn_create_dish"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Crear" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_ingredients"
                 android:layout_width="match_parent"
-                android:layout_height="306dp" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100px"/>
+
+            <Button
+                android:id="@+id/btn_create_dish"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:layout_alignParentBottom="true"
+                android:text="Crear" />
 
         </LinearLayout>
 

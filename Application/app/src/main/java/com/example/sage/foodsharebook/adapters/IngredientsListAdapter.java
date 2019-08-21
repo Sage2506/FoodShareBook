@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sage.foodsharebook.R;
-import com.example.sage.foodsharebook.models.IngredientResponse;
+import com.example.sage.foodsharebook.models.Ingredient;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 
 public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsListAdapter.ViewHolder>{
-    private ArrayList<IngredientResponse> dataset;
+    private ArrayList<Ingredient> dataset;
     private Context context;
 
     public IngredientsListAdapter(Context context){
@@ -29,12 +29,12 @@ public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsList
         dataset = new ArrayList<>();
     }
 
-    public void addIngredientsList(ArrayList<IngredientResponse> ingredients){
+    public void addIngredientsList(ArrayList<Ingredient> ingredients){
         dataset.addAll(ingredients);
         notifyDataSetChanged();
     }
 
-    public void addIngredientItem(IngredientResponse ingredient){
+    public void addIngredientItem(Ingredient ingredient){
         dataset.add(ingredient);
         notifyDataSetChanged();
     }
@@ -46,7 +46,7 @@ public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsList
 
     @Override
     public void onBindViewHolder(IngredientsListAdapter.ViewHolder holder, int position) {
-        IngredientResponse i = dataset.get(position);
+        Ingredient i = dataset.get(position);
         holder.TvIngredientName.setText(i.getName());
         holder.TvIngredientDesc.setText(i.getDescription());
         Glide.with(context)

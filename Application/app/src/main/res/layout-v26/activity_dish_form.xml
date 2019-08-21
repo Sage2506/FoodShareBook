@@ -56,15 +56,23 @@
                     android:inputType="" />
 
                 <Button
+                    android:id="@+id/btn_add_ingredient"
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:layout_above="@+id/btn_create_dish"
+                    android:text="Agregar Ingrediente" />
+                <Button
                     android:id="@+id/btn_create_dish"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Crear" />
+                    android:layout_height="100px"
 
+                    android:text="Crear" />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_ingredients"
                     android:layout_width="match_parent"
-                    android:layout_height="306dp" />
+                    android:layout_height="match_parent"
+                    />
+
 
             </LinearLayout>
 

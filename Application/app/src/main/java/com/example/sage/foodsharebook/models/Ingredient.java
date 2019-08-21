@@ -1,11 +1,17 @@
 package com.example.sage.foodsharebook.models;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
+
 
 public class Ingredient{
 
 	@SerializedName("image")
-	private Object image;
+	private String image;
+
+	@SerializedName("measures")
+	private List<Integer> measures;
 
 	@SerializedName("name")
 	private String name;
@@ -13,18 +19,29 @@ public class Ingredient{
 	@SerializedName("description")
 	private String description;
 
+	@SerializedName("id")
+	private int id;
 
-	public Ingredient(String name, String description){
+	public Ingredient(String name, String description, List<Integer> measures){
 		this.name = name;
 		this.description = description;
+		this.measures = measures;
 	}
 
-	public void setImage(Object image){
+	public void setImage(String image){
 		this.image = image;
 	}
 
-	public Object getImage(){
+	public String getImage(){
 		return image;
+	}
+
+	public void setMeasures(List<Integer> measures){
+		this.measures = measures;
+	}
+
+	public List<Integer> getMeasures(){
+		return measures;
 	}
 
 	public void setName(String name){
@@ -43,12 +60,11 @@ public class Ingredient{
 		return description;
 	}
 
-	@Override
-	public String toString(){
-		return "Ingredient{ "+
-				"name='" + name + '\'' +
-				", description='" + description+ '\'' +
-				'}';
+	public void setId(int id){
+		this.id = id;
+	}
 
+	public int getId(){
+		return id;
 	}
 }

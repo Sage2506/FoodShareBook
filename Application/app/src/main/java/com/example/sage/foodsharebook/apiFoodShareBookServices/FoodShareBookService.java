@@ -2,7 +2,7 @@ package com.example.sage.foodsharebook.apiFoodShareBookServices;
 
 import com.example.sage.foodsharebook.models.Dish;
 import com.example.sage.foodsharebook.models.Ingredient;
-import com.example.sage.foodsharebook.models.IngredientResponse;
+import com.example.sage.foodsharebook.models.Ingredient;
 import com.example.sage.foodsharebook.models.LoginResponse;
 import com.example.sage.foodsharebook.models.UserLogin;
 
@@ -27,16 +27,16 @@ public interface FoodShareBookService {
     Call<Dish> newDish(@Header("Authorization") String token, @Body Dish body);
 
     @GET("ingredients")
-    Call<ArrayList<IngredientResponse>> getAllIngredients(@Header("Authorization") String token);
+    Call<ArrayList<Ingredient>> getAllIngredients(@Header("Authorization") String token);
 
     @POST("ingredients")
-    Call<IngredientResponse> newIngredient(@Body Ingredient body);
+    Call<Ingredient> newIngredient(@Body Ingredient body);
 
     /*@POST("dish_ingredients")
-    Call<DishIngredientResponse> newDishIngredient(@Body DishIngredient body);*/
+    Call<DishIngredient> newDishIngredient(@Body DishIngredient body);*/
 
     @GET("ingredients/{INGREDIENT_ID}")
-    Call<IngredientResponse> getIngredient(@Header("Authorization") String token,@Path("INGREDIENT_ID") int ingredient_id);
+    Call<Ingredient> getIngredient(@Header("Authorization") String token,@Path("INGREDIENT_ID") int ingredient_id);
 
     @POST("users/login")
     Call<LoginResponse> uerLogin(@Body UserLogin body);

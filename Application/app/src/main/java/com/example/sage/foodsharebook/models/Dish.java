@@ -40,6 +40,7 @@ public class Dish implements Serializable {
 		this.dishIngredients = dishIngredients;
 	}
 
+
 	public List<DishIngredient> getDishIngredients(){
 		return dishIngredients;
 	}
