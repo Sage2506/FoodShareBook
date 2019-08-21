@@ -44,6 +44,14 @@ public class Ingredient{
 		return measures;
 	}
 
+	public String getMeasuresString() {
+		String result = "";
+		for(int m : this.measures){
+			result+= m + ",";
+		}
+		return result;
+	}
+
 	public void setName(String name){
 		this.name = name;
 	}

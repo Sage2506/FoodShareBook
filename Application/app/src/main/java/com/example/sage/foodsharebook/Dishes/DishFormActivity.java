@@ -1,5 +1,6 @@
 package com.example.sage.foodsharebook.Dishes;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sage.foodsharebook.Ingredients.IngredientListActivity;
 import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.adapters.DishIngredientAdapter;
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
@@ -17,6 +19,7 @@ import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
 import com.example.sage.foodsharebook.models.Dish;
 import com.example.sage.foodsharebook.models.DishIngredient;
 import com.example.sage.foodsharebook.models.Ingredient;
+import static com.example.sage.foodsharebook.Config.Constants.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,9 @@ import java.util.List;
 import static com.example.sage.foodsharebook.Config.Constants.*;
 
 public class DishFormActivity extends AppCompatActivity {
-    private String TAG = "DishFormActivity";
+    private final String TAG = "DishForm";
+
+    static final int PICK_DISH_INGREDIENT_REQUEST = 1;
 
     private EditText name;
     private EditText recipe;
@@ -77,6 +82,31 @@ public class DishFormActivity extends AppCompatActivity {
 
             }
         });
+
+        btnAddIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ingredientListActivity = new Intent(getApplicationContext(),IngredientListActivity.class);
+                startActivityForResult(ingredientListActivity,PICK_DISH_INGREDIENT_REQUEST);
+            }
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_DISH_INGREDIENT_REQUEST)
+        {
+            if(data != null){
+
+
+            int ingredient_id = data.getIntExtra(INGREDIENT_ID,-1);
+            if(ingredient_id != -1){
+                Log.i(TAG, "The ingredient Selected had id: "+ingredient_id);
+            } else {
+                Log.i(TAG, "You did something wrong "+ingredient_id);
+            }
+            }
+        }
     }
 
     private void enableInputs(boolean status){

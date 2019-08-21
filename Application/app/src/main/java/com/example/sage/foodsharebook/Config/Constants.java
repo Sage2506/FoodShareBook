@@ -23,5 +23,12 @@ public class Constants {
     public static final String DISH_IMAGE = "image";
     public static final String DISH_INGREDIENTS_NUMBER = "ingredientsSize";
     public static final String DISH_INGREDIENT = "ingredient";
+    public static final String INGREDIENT_ID = "ingredient_id";
+    public static final String INGREDIENT_IMAGE = "image";
+    public static final String INGREDIENT_MEASURES = "measures_ids";
+    public static final String INGREDIENT_NAME = "ingredient_name";
+
+    //----------------------Measures---------------------
+
 
 }

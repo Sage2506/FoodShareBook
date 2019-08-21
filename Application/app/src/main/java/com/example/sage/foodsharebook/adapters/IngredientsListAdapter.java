@@ -23,6 +23,13 @@ import java.util.ArrayList;
 public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsListAdapter.ViewHolder>{
     private ArrayList<Ingredient> dataset;
     private Context context;
+    private Listener listener;
+
+    public interface Listener{
+        void openIngredient(Ingredient ingredient);
+    }
+
+    public void setListener(Listener listener){ this.listener = listener;}
 
     public IngredientsListAdapter(Context context){
         this.context = context;
@@ -41,6 +48,17 @@ public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsList
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ingredient_item,parent,false);
+
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(listener != null){
+                    Ingredient i = dataset.get((int)view.getTag());
+                    listener.openIngredient(i);
+                }
+            }
+        });
         return new ViewHolder(view);
     }
 
@@ -49,6 +67,7 @@ public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsList
         Ingredient i = dataset.get(position);
         holder.TvIngredientName.setText(i.getName());
         holder.TvIngredientDesc.setText(i.getDescription());
+        holder.cardView.setTag(position);
         Glide.with(context)
                 .load(i.getImage())
                 .centerCrop()
@@ -66,11 +85,13 @@ public class IngredientsListAdapter extends RecyclerView.Adapter<IngredientsList
         private ImageView IvIngredientPic;
         private TextView TvIngredientName;
         private TextView TvIngredientDesc;
+        private CardView cardView;
         public ViewHolder(View itemView) {
             super(itemView);
             IvIngredientPic = itemView.findViewById(R.id.iv_ingredient_pic);
             TvIngredientName = itemView.findViewById(R.id.tv_ingredient_name);
             TvIngredientDesc = itemView.findViewById(R.id.tv_ingredient_desc);
+            cardView = (CardView) itemView;
 
         }
     }

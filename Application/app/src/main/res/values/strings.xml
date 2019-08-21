@@ -19,4 +19,7 @@
     <string name="dish">Platillo</string>
     <string name="description">Descripcion</string>
     <string name="dish_image">Imagen de platillo</string>
+    <string name="ingredient">Ingrediente</string>
+    <string name="quantity">Cantidad</string>
+
 </resources>
