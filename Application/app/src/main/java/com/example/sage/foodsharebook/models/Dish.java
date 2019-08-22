@@ -28,12 +28,12 @@ public class Dish implements Serializable {
 	@SerializedName("id")
 	private Integer id;
 
-	public Dish(String name, String recipe, String description, int userId, List<DishIngredient> dishIngredients){
+	public Dish(String name, String recipe, String description, String image,  List<DishIngredient> dishIngredients){
 		this.name = name;
 		this.recipe = recipe;
 		this.description = description;
-		this.userId = userId;
 		this.dishIngredients = dishIngredients;
+		this.image = image;
 	}
 
 	public void setDishIngredients(List<DishIngredient> dishIngredients){
@@ -91,5 +91,19 @@ public class Dish implements Serializable {
 
 	public int getId(){
 		return id;
+	}
+
+	@Override
+	public String toString(){
+		return
+				"Response{" +
+						",id = '" + id + '\'' +
+						"dish_ingredients = '" + dishIngredients + '\'' +
+						",image = '" + image + '\'' +
+						",user_id = '" + userId + '\'' +
+						",name = '" + name + '\'' +
+						",recipe = '" + recipe + '\'' +
+						",description = '" + description + '\'' +
+						"}";
 	}
 }

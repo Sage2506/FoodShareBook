@@ -1,5 +1,6 @@
 package com.example.sage.foodsharebook.Ingredients;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.sage.foodsharebook.Config.Constants.*;
 
@@ -29,6 +31,7 @@ public class IngredientMeasureActivity extends AppCompatActivity {
     private ImageView iv_ingredient_image;
     private RadioGroup rg_measures;
     private Button btn_add_ingredient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,17 +68,27 @@ public class IngredientMeasureActivity extends AppCompatActivity {
         btn_add_ingredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int measure_id = (int)findViewById(rg_measures.getCheckedRadioButtonId()).getTag();
-                Log.i(TAG, "Mostrando ingrediente creado");
-                DishIngredient dishIngredient = new DishIngredient(
-                  intent.getIntExtra(INGREDIENT_ID,-1),
-                  ingredient_name,
-                  ingredient_image,
-                  measure_id,
-                  // TODO: validate case when not quantity or measure selected
-                  Float.parseFloat(et_quantity.getText().toString().trim())
-                );
-            Log.i(TAG,"cantidad del dishingredient: "+dishIngredient.getQuantity());
+                if(et_quantity.getText().toString().isEmpty() || rg_measures.getCheckedRadioButtonId() == -1 ){
+                    Toast.makeText(getApplicationContext(), "Fields missing", Toast.LENGTH_SHORT).show();
+                } else {
+                    int measure_id = (int)findViewById(rg_measures.getCheckedRadioButtonId()).getTag();
+                    Log.i(TAG, "Mostrando ingrediente creado");
+                    DishIngredient dishIngredient = new DishIngredient(
+                      intent.getIntExtra(INGREDIENT_ID,-1),
+                      ingredient_name,
+                      ingredient_image,
+                      measure_id,
+                      Float.parseFloat(et_quantity.getText().toString().trim())
+                    );
+                    Intent intent = new Intent();
+                    intent.putExtra(INGREDIENT_NAME, dishIngredient.getIngredientName());
+                    intent.putExtra(INGREDIENT_IMAGE, dishIngredient.getIngredientImage());
+                    intent.putExtra(QUANTITY, dishIngredient.getQuantity());
+                    intent.putExtra(MEASURE_ID, dishIngredient.getMeasureId());
+                    intent.putExtra(INGREDIENT_ID, dishIngredient.getIngredientId());
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
             }
         });
 
@@ -86,7 +99,6 @@ public class IngredientMeasureActivity extends AppCompatActivity {
         for(Integer measure : measures){
             RadioButton rb = new RadioButton(this);
             rb.setText(measureString(measure));
-            //rb.setId(measure+99);
             rb.setTag(measure);
             radioGroup.addView(rb);
             i++;

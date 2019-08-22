@@ -25,12 +25,17 @@ public class DishIngredientAdapter extends RecyclerView.Adapter<DishIngredientAd
         dataset = new ArrayList<>();
     }
 
+    public void clearDataset(){
+        this.dataset.clear();
+        notifyDataSetChanged();
+    }
+
     public void addIngredientsList(ArrayList<DishIngredient> ingredients){
         dataset.addAll(ingredients);
         notifyDataSetChanged();
     }
 
-    public void addIngredientItem(DishIngredient ingredient){
+    public void addDishIngredientItem(DishIngredient ingredient){
         dataset.add(ingredient);
         notifyDataSetChanged();
     }
@@ -55,6 +60,7 @@ public class DishIngredientAdapter extends RecyclerView.Adapter<DishIngredientAd
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.IvDishIngredientPic);
+        holder.TvDishIngredientMeasure.setText(measureString(i.getMeasureId()));
     }
 
     @Override
@@ -76,5 +82,30 @@ public class DishIngredientAdapter extends RecyclerView.Adapter<DishIngredientAd
 
 
         }
+    }
+    private String measureString(int measure){
+        String result = "";
+        switch (measure){
+            case 1: result = "Piezas";
+                break;
+            case 2: result = "Gramos";
+                break;
+            case 3: result = "Kilogramos";
+                break;
+            case 4: result = "Mililitros";
+                break;
+            case 5: result = "Litros";
+                break;
+            case 6: result = "Cucharadas";
+                break;
+            case 7: result = "Tazas";
+                break;
+            case 8: result = "Rebanadas";
+                break;
+            case 9: result = "Pieza";
+                break;
+            default: result = "";
+        }
+        return result;
     }
 }

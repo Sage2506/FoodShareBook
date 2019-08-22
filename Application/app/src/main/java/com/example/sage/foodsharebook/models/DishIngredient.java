@@ -69,4 +69,16 @@ public class DishIngredient implements Serializable {
 	public Integer getMeasureId(){
 		return measureId;
 	}
+
+	@Override
+	public String toString(){
+		return
+				"DishIngredientsItem{" +
+						"quantity = '" + quantity + '\'' +
+						",ingredient_id = '" + ingredientId + '\'' +
+						",ingredient_name = '" + ingredientName + '\'' +
+						",ingredient_image = '" + ingredientImage + '\'' +
+						",measure_id = '" + measureId + '\'' +
+						"}";
+	}
 }

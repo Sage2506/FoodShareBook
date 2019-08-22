@@ -15,11 +15,12 @@ import com.example.sage.foodsharebook.R;
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
 import com.example.sage.foodsharebook.models.Dish;
+import com.example.sage.foodsharebook.models.DishIngredient;
 
 import static com.example.sage.foodsharebook.Config.Constants.*;
 
 
-
+// TODO: implement a refresh swipe
 public class FoodListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DishesListAdapter dishesListAdapter;
@@ -60,9 +61,14 @@ public class FoodListActivity extends AppCompatActivity {
                 if(dish.getDishIngredients() != null)
                 dishScreen.putExtra("ingredientsSize",dish.getDishIngredients().size());
                 dishScreen.putExtra("image",dish.getImage());
+                int i = 0;
                 if(dish.getDishIngredients() != null)
-                for(int i= 0; i< dish.getDishIngredients().size(); i++){
-                    dishScreen.putExtra("ingredient"+i,dish.getDishIngredients().get(i).getIngredientId());
+                for(DishIngredient dishIngredient : dish.getDishIngredients()){
+                    dishScreen.putExtra(INGREDIENT_NAME+i,dishIngredient.getIngredientName());
+                    dishScreen.putExtra(INGREDIENT_IMAGE+i,dishIngredient.getIngredientImage());
+                    dishScreen.putExtra(MEASURE_ID+i, dishIngredient.getMeasureId());
+                    dishScreen.putExtra(QUANTITY+i,dishIngredient.getQuantity());
+                    i++;
                 }
                 startActivity(dishScreen);
 

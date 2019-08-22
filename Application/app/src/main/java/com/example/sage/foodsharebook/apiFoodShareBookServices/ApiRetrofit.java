@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 
+import com.example.sage.foodsharebook.adapters.DishIngredientAdapter;
 import com.example.sage.foodsharebook.adapters.DishesListAdapter;
 import com.example.sage.foodsharebook.adapters.IngredientsListAdapter;
 import com.example.sage.foodsharebook.models.Dish;
@@ -37,7 +38,7 @@ public class ApiRetrofit {
 
     public ApiRetrofit(Context context){
         retrofit = new Retrofit.Builder()
-                .baseUrl(DEVELOPMENT_API_URL)
+                .baseUrl(HEROKU_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(FoodShareBookService.class);
@@ -107,8 +108,8 @@ public class ApiRetrofit {
             }
         });
     }
-    public void postDish(String name, String description, String recipe, List<DishIngredient> dishIngredients, final DishCallBack dishCallBack ){
-        Call<Dish> call = service.newDish(prefs.getString(USER_TOKEN,null),new Dish(name, recipe, description, prefs.getInt(USER_ID, -1), dishIngredients));
+    public void postDish(Dish newDish, final DishCallBack dishCallBack ){
+        Call<Dish> call = service.newDish(prefs.getString(USER_TOKEN,null),newDish);
         call.enqueue(new Callback<Dish>() {
             @Override
             public void onResponse(Call<Dish> call, Response<Dish> response) {
@@ -148,13 +149,13 @@ public class ApiRetrofit {
             }
         });
     }*/
-    public void getIngredientByID(int ingredientId, final IngredientsListAdapter adapter){
+    /*public void getIngredientByID(int ingredientId, final DishIngredientAdapter adapter){
         Call<Ingredient> call = service.getIngredient(prefs.getString("token",null),ingredientId);
         call.enqueue(new Callback<Ingredient>() {
             @Override
             public void onResponse(Call<Ingredient> call, Response<Ingredient> response) {
                 if(response.isSuccessful()){
-                    adapter.addIngredientItem(response.body());
+                    adapter.addDishIngredientItem(response.body());
 
                 }
                 else{
@@ -167,7 +168,7 @@ public class ApiRetrofit {
                 Log.i(TAG, t.getMessage());
             }
         });
-    }
+    }*/
     public void logIn(String email, String password, final ServiceCallBack serviceCallBack){
         Call<LoginResponse> call = service.uerLogin(new UserLogin(email, password));
         call.enqueue(new Callback<LoginResponse>() {

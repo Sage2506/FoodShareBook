@@ -17,7 +17,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/iv_dish_pic"
+                android:id="@+id/ib_dish_pic"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.3"
@@ -58,13 +58,13 @@
                 <Button
                     android:id="@+id/btn_add_ingredient"
                     android:layout_width="match_parent"
-                    android:layout_height="100px"
+                    android:layout_height="40sp"
                     android:layout_above="@+id/btn_create_dish"
                     android:text="Agregar Ingrediente" />
                 <Button
                     android:id="@+id/btn_create_dish"
                     android:layout_width="match_parent"
-                    android:layout_height="100px"
+                    android:layout_height="40sp"
 
                     android:text="Crear" />
                 <android.support.v7.widget.RecyclerView

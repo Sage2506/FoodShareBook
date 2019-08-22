@@ -27,6 +27,9 @@ public class Constants {
     public static final String INGREDIENT_IMAGE = "image";
     public static final String INGREDIENT_MEASURES = "measures_ids";
     public static final String INGREDIENT_NAME = "ingredient_name";
+    public static final String MEASURE_ID = "measure_id";
+    public static final String QUANTITY = "quantity";
+
 
     //----------------------Measures---------------------
 

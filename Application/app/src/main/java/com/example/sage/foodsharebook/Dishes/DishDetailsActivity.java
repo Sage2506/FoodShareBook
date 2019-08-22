@@ -13,20 +13,22 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import com.example.sage.foodsharebook.R;
-import com.example.sage.foodsharebook.adapters.IngredientsListAdapter;
+import com.example.sage.foodsharebook.adapters.DishIngredientAdapter;
 import com.example.sage.foodsharebook.apiFoodShareBookServices.ApiRetrofit;
+import com.example.sage.foodsharebook.models.DishIngredient;
+
 import static com.example.sage.foodsharebook.Config.Constants.*;
 
 
 
 public class DishDetailsActivity extends AppCompatActivity {
-    private IngredientsListAdapter adapter;
+    private DishIngredientAdapter adapter;
     private ApiRetrofit api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new IngredientsListAdapter(this);
+        adapter = new DishIngredientAdapter(this);
         api = new ApiRetrofit(this);
 
         setContentView(R.layout.activity_dish_details);
@@ -64,15 +66,17 @@ public class DishDetailsActivity extends AppCompatActivity {
         tvRecipe.setText(recipe);
         Log.i("Dishes details","numero de ingredientes: "+ingredients);
         if(ingredients>0){
-            getIngredients(ingredientsIds);
+            for(int i = 0; i < ingredients; i++){
+                adapter.addDishIngredientItem(new DishIngredient(
+                                            data.getIntExtra(INGREDIENT_ID+i,-1),
+                                            data.getStringExtra(INGREDIENT_NAME+i),
+                                            data.getStringExtra(INGREDIENT_IMAGE+i),
+                                            data.getIntExtra(MEASURE_ID+i, -1),
+                                            data.getFloatExtra(QUANTITY+i,-1.0f)
+                ));
+            }
+
         }
 
-    }
-
-    private void getIngredients(int[] ids){
-            for (int i = 0; i<ids.length;i++){
-                Log.i("Dish details","id de: "+ids[i]);
-                api.getIngredientByID(ids[i],adapter);
-            }
     }
 }

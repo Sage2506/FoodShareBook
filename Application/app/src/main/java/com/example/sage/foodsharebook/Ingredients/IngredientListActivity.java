@@ -1,5 +1,6 @@
 package com.example.sage.foodsharebook.Ingredients;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,18 +36,12 @@ public class IngredientListActivity extends AppCompatActivity {
         adapter.setListener(new IngredientsListAdapter.Listener() {
             @Override
             public void openIngredient(Ingredient ingredient) {
-                // TODO: Abrir la siguiente pantalla para seleccionar una medida y la cantidad en numero
-                // IngredientMeasureActivity
                 Intent intent = new Intent(getApplicationContext(),IngredientMeasureActivity.class);
                 intent.putExtra(INGREDIENT_ID,ingredient.getId());
                 intent.putExtra(INGREDIENT_IMAGE,ingredient.getImage());
                 intent.putExtra(INGREDIENT_MEASURES,ingredient.getMeasuresString());
                 intent.putExtra(INGREDIENT_NAME,ingredient.getName());
                 startActivityForResult(intent,CREATE_INGREDIENT_MEASURE_REQUEST );
-                /*Intent intent = new Intent();
-                intent.putExtra(INGREDIENT_ID, ingredient.getId());
-                setResult(1, intent);
-                finish();*/
             }
         });
 
@@ -56,15 +51,11 @@ public class IngredientListActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CREATE_INGREDIENT_MEASURE_REQUEST)
+        if (requestCode == CREATE_INGREDIENT_MEASURE_REQUEST && resultCode == Activity.RESULT_OK)
         {
             if(data!=null){
-                int ingredient_id = data.getIntExtra(INGREDIENT_ID,-1);
-                if(ingredient_id != -1){
-                    Log.i(TAG, "The ingredient Selected had id: "+ingredient_id);
-                } else {
-                    Log.i(TAG, "You did something wrong "+ingredient_id);
-                }
+                setResult(Activity.RESULT_OK, data);
+                finish();
             }
         }
     }
