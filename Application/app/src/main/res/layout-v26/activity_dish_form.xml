@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.sage.foodsharebook.Dishes.DishFormActivity"
+    android:fillViewport="true">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context="com.example.sage.foodsharebook.Dishes.DishDetailsActivity"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ib_dish_pic"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:contentDescription="@string/dish_image">
+
+            </ImageButton>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:orientation="vertical"
+                >
+                <EditText
+                    android:id="@+id/te_dish_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dish"
+                    android:textSize="@dimen/dish_name"
+                    android:inputType=""
+                    android:autofillHints="" />
+                <EditText
+                    android:id="@+id/te_dish_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/description"
+                    android:textSize="@dimen/dish_decription"
+                    android:autofillHints=""
+                    android:inputType="" />
+                <EditText
+                    android:id="@+id/te_dish_recipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/recipe"
+                    android:textSize="@dimen/dish_recipe"
+                    android:autofillHints=""
+                    android:inputType="" />
+
+                <Button
+                    android:id="@+id/btn_add_ingredient"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
+                    android:layout_above="@+id/btn_create_dish"
+                    android:text="Agregar Ingrediente" />
+                <Button
+                    android:id="@+id/btn_create_dish"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
+
+                    android:text="Crear" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+</ScrollView>

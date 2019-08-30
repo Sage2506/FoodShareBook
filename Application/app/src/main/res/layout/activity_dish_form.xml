@@ -9,56 +9,68 @@
     android:fillViewport="true">
 
 
-        <LinearLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.example.sage.foodsharebook.Dishes.DishDetailsActivity"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/iv_dish_pic"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="com.example.sage.foodsharebook.Dishes.DishDetailsActivity"
-            android:orientation="vertical">
-            <ImageButton
-                android:id="@+id/iv_dish_pic"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:contentDescription="@string/dish_image">
+
+        </ImageButton>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:orientation="vertical"
+            >
+            <EditText
+                android:id="@+id/te_dish_name"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.3"
-                >
-
-            </ImageButton>
-            <LinearLayout
+                android:layout_height="wrap_content"
+                android:hint="@string/dish"
+                android:textSize="@dimen/dish_name"
+                android:inputType=""
+                android:autofillHints="" />
+            <EditText
+                android:id="@+id/te_dish_desc"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.7"
-                android:orientation="vertical"
-                >
-                <EditText
-                    android:id="@+id/tv_dish_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Platillo"
-                    android:textSize="@dimen/dish_name"
-                    />
-                <EditText
-                    android:id="@+id/tv_dish_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Descripcion"
-                    android:textSize="@dimen/dish_decription"
-                    />
-                <EditText
-                    android:id="@+id/tv_dish_recipe"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Receta"
-                    android:textSize="@dimen/dish_recipe"
-                    />
+                android:layout_height="wrap_content"
+                android:hint="@string/description"
+                android:textSize="@dimen/dish_decription"
+                android:autofillHints=""
+                android:inputType="" />
+            <EditText
+                android:id="@+id/te_dish_recipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/recipe"
+                android:textSize="@dimen/dish_recipe"
+                android:autofillHints=""
+                android:inputType="" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_ingredients"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="100px"/>
 
+            <Button
+                android:id="@+id/btn_create_dish"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:layout_alignParentBottom="true"
+                android:text="Crear" />
 
         </LinearLayout>
+
+
+    </LinearLayout>
 
 </ScrollView>
